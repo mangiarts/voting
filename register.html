@@ -10,11 +10,13 @@
         body {
             font-family: 'Poppins', sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background: #1a1a2ed5;
-            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0;
+            padding: 80px 20px 60px; /* Adjusted padding to account for header and footer */
         }
         #background-logo {
             position: absolute;
@@ -54,76 +56,11 @@
             font-size: 32px;
             cursor: pointer;
             border: none;
-        }
-        .upload-text {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #333;
-        }
-        h2 {
-            font-family: 'Barkscript', cursive;
-            color: #333;
-            font-size: 28px;
-        }
-        input, select {
-            width: 100%;
-            padding: 14px;
-            margin: 12px 0;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 16px;
-        }
-        .btn {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 14px;
-            cursor: pointer;
-            width: 100%;
-            border-radius: 8px;
-            font-size: 16px;
             transition: background 0.3s;
         }
-        .btn:hover {
+        .upload-btn:hover {
             background: #0056b3;
         }
-        body {
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            flex-direction: column;
-        }
-        
-        .container {
-            background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
-            width: 400px;
-            text-align: center;
-        }
-        .upload-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .upload-btn {
-            width: 80px;
-            height: 80px;
-            background: #363636;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 32px;
-            cursor: pointer;
-            border: none;
-        }
         .upload-text {
             margin-top: 10px;
             font-size: 14px;
@@ -133,6 +70,8 @@
             font-family: 'Barkscript', cursive;
             color: #333;
             font-size: 28px;
+            margin-bottom: 20px;
+            padding: 20px 0;
         }
         input, select {
             width: 100%;
@@ -141,6 +80,11 @@
             border: 1px solid #ccc;
             border-radius: 8px;
             font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        input:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
         }
         .btn {
             background: #007bff;
@@ -152,6 +96,7 @@
             border-radius: 8px;
             font-size: 16px;
             transition: background 0.3s;
+            margin-top: 20px;
         }
         .btn:hover {
             background: #0056b3;
@@ -163,101 +108,126 @@
         .error {
             border: 2px solid red;
         }
-        .message {
+        .modal {
             display: none;
-            padding: 15px;
-            margin-top: 10px;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
             border-radius: 8px;
             text-align: center;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .checkbox-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 12px 0;
+        }
+        .checkbox-container label {
+            margin-left: 5px;
+            margin-right: 15px;
+        }
+        header, footer {
+            width: 100%;
+            background: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            left: 0;
+            transition: opacity 0.3s;
+        }
+        header {
+            top: 0;
+        }
+        footer {
+            bottom: 0;
+        }
+        .home-btn {
+            background: white;
+            color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 8px;
             font-size: 16px;
+            transition: background 0.3s;
         }
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .error-message {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+        .home-btn:hover {
+            background: #f0f0f0;
         }
     </style>
-    <script>
-        function triggerFileUpload() {
-            document.getElementById('fileInput').click();
-        }
-        
-        function capitalizeName() {
-            let name = document.getElementById('fullName');
-            name.value = name.value.replace(/\b\w/g, char => char.toUpperCase());
-        }
-        
-        function validateForm() {
-            let name = document.getElementById('fullName');
-            let email = document.getElementById('email');
-            let phone = document.getElementById('phone');
-            let selects = document.querySelectorAll('select');
-            let file = document.getElementById('fileInput');
-            let button = document.getElementById('registerBtn');
-            
-            let nameValid = /^[A-Z][a-z]+(\s[A-Z][a-z]+)*$/.test(name.value);
-            let emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value);
-            let phoneValid = /^\d{10}$/.test(phone.value);
-            let selectsValid = Array.from(selects).every(select => select.value !== "");
-            let fileValid = file.files.length > 0;
-            
-            name.classList.toggle('error', !nameValid);
-            email.classList.toggle('error', !emailValid);
-            phone.classList.toggle('error', !phoneValid);
-            
-            button.disabled = !(nameValid && emailValid && phoneValid && selectsValid && fileValid);
-        }
-        
-        function submitForm() {
-            let button = document.getElementById('registerBtn');
-            let messageBox = document.getElementById('messageBox');
-            
-            if (!button.disabled) {
-                messageBox.textContent = "Registration successful!";
-                messageBox.className = "message success";
-            } else {
-                messageBox.textContent = "Please correct errors in the form before submitting.";
-                messageBox.className = "message error-message";
-            }
-            messageBox.style.display = "block";
-        }
-    </script>
 </head>
 <body>
     <div id="background-logo"></div>
+    <header id="header">
+        <button class="home-btn" onclick="window.location.href='index.html'">Home</button>
+    </header>
     <div class="container">
-        
         <h2>Register</h2>
         <div class="upload-container">
             <button class="upload-btn" onclick="triggerFileUpload()">+</button>
             <p class="upload-text">Upload a Profile Pic</p>
             <input type="file" id="fileInput" style="display: none;" required>
         </div>
-        <input type="text" placeholder="Full Name" required>
-        <input type="email" placeholder="Email" required>
-        <input type="tel" placeholder="Phone Number" required>
-        <select required>
+        <input type="text" id="name" placeholder="Full Name" required>
+        <input type="text" id="artistName" placeholder="Artist Name" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="tel" id="phone" placeholder="Phone Number" pattern="\d{10}" required>
+        <input type="text" id="idNumber" placeholder="ID Number" required>
+        <div class="checkbox-container">
+            <div>
+                <input type="checkbox" id="myIdNo" name="idType" required>
+                <label for="myIdNo">My ID NO</label>
+            </div>
+            <div>
+                <input type="checkbox" id="guardiansIdNo" name="idType" required>
+                <label for="guardiansIdNo">Guardian's ID NO</label>
+            </div>
+        </div>
+        <select id="gender" required>
             <option value="">Select Gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="other">Other</option>
         </select>
-        <select required>
+        <select id="talent" required>
             <option value="">Select Talent Category</option>
-            <option value="Secular singing">secular singing</option>
+            <option value="Secular singing">Secular Singing</option>
             <option value="Gospel singing">Gospel Singing</option>
             <option value="dancing">Dancing</option>
             <option value="acting">Acting</option>
-            <option value="modelling">modelling</option>
+            <option value="modelling">Modelling</option>
             <option value="Art">Art</option>
             <option value="other">Other</option>
         </select>
-        <select required>
+        <select id="county" required>
             <option value="">Select County</option>
             <option value="baringo">Baringo</option>
             <option value="bomet">Bomet</option>
@@ -307,7 +277,158 @@
             <option value="wajir">Wajir</option>
             <option value="west-pokot">West Pokot</option>
         </select>
-        <button class="btn">Register</button>
+        <button class="btn" onclick="validateForm()">Register</button>
     </div>
+
+    <!-- The Modal -->
+    <div id="errorModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('errorModal')">&times;</span>
+            <p id="errorMessage"></p>
+        </div>
+    </div>
+
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('successModal')">&times;</span>
+            <p>Registration Successful!</p>
+        </div>
+    </div>
+
+    <footer id="footer">
+        Useful Links
+    </footer>
+
+    <script>
+        function triggerFileUpload() {
+            document.getElementById('fileInput').click();
+        }
+
+        function validateForm() {
+            let name = document.getElementById("name");
+            let artistName = document.getElementById("artistName");
+            let email = document.getElementById("email");
+            let phone = document.getElementById("phone");
+            let idNumber = document.getElementById("idNumber");
+            let myIdNo = document.getElementById("myIdNo");
+            let guardiansIdNo = document.getElementById("guardiansIdNo");
+            let gender = document.getElementById("gender");
+            let talent = document.getElementById("talent");
+            let county = document.getElementById("county");
+            let fileInput = document.getElementById("fileInput");
+            let errorMessage = document.getElementById("errorMessage");
+            
+            name.classList.remove("error");
+            artistName.classList.remove("error");
+            email.classList.remove("error");
+            phone.classList.remove("error");
+            idNumber.classList.remove("error");
+            myIdNo.classList.remove("error");
+            guardiansIdNo.classList.remove("error");
+            gender.classList.remove("error");
+            talent.classList.remove("error");
+            county.classList.remove("error");
+            fileInput.classList.remove("error");
+            
+            if (name.value === "" || artistName.value === "" || email.value === "" || phone.value === "" || idNumber.value === "" || (!myIdNo.checked && !guardiansIdNo.checked) || gender.value === "" || talent.value === "" || county.value === "" || fileInput.value === "") {
+                errorMessage.textContent = "Please fill in all fields!";
+                showModal('errorModal');
+                if (name.value === "") name.classList.add("error");
+                if (artistName.value === "") artistName.classList.add("error");
+                if (email.value === "") email.classList.add("error");
+                if (phone.value === "") phone.classList.add("error");
+                if (idNumber.value === "") idNumber.classList.add("error");
+                if (!myIdNo.checked && !guardiansIdNo.checked) {
+                    myIdNo.classList.add("error");
+                    guardiansIdNo.classList.add("error");
+                }
+                if (gender.value === "") gender.classList.add("error");
+                if (talent.value === "") talent.classList.add("error");
+                if (county.value === "") county.classList.add("error");
+                if (fileInput.value === "") fileInput.classList.add("error");
+                return;
+            }
+
+            if (!/^\d{10}$/.test(phone.value)) {
+                errorMessage.textContent = "Phone number must be exactly 10 digits!";
+                showModal('errorModal');
+                phone.classList.add("error");
+                return;
+            }
+
+            if (!email.value.endsWith("@gmail.com")) {
+                errorMessage.textContent = "Email must end with @gmail.com!";
+                showModal('errorModal');
+                email.classList.add("error");
+                return;
+            }
+            
+            showModal('successModal');
+            clearForm();
+        }
+
+        function clearForm() {
+            document.getElementById("name").value = "";
+            document.getElementById("artistName").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("phone").value = "";
+            document.getElementById("idNumber").value = "";
+            document.getElementById("myIdNo").checked = false;
+            document.getElementById("guardiansIdNo").checked = false;
+            document.getElementById("gender").value = "";
+            document.getElementById("talent").value = "";
+            document.getElementById("county").value = "";
+            document.getElementById("fileInput").value = "";
+        }
+
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+        }
+
+        document.getElementById('phone').addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        });
+
+        document.getElementById('name').addEventListener('input', function (e) {
+            e.target.value = e.target.value.replace(/\b\w/g, function (char) {
+                return char.toUpperCase();
+            });
+        });
+
+        document.getElementById('email').addEventListener('input', function (e) {
+            e.target.value = e.target.value.toLowerCase();
+        });
+
+        document.getElementById('myIdNo').addEventListener('change', function () {
+            if (this.checked) {
+                document.getElementById('guardiansIdNo').checked = false;
+            }
+        });
+
+        document.getElementById('guardiansIdNo').addEventListener('change', function () {
+            if (this.checked) {
+                document.getElementById('myIdNo').checked = false;
+            }
+        });
+
+        window.addEventListener('scroll', function () {
+            const header = document.getElementById('header');
+            const footer = document.getElementById('footer');
+            if (window.scrollY === 0) {
+                header.style.opacity = '1';
+            } else {
+                header.style.opacity = '0';
+            }
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                footer.style.opacity = '1';
+            } else {
+                footer.style.opacity = '0';
+            }
+        });
+    </script>
 </body>
 </html>
