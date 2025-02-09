@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Barkscript&family=Poppins:wght@300;400;600&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #1a1a2ed5;
+            flex-direction: column;
+        }
+        #background-logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('logo.png') no-repeat center center;
+            background-size: cover;
+            opacity: 0.2;
+            z-index: -2;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+        }
+        .upload-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .upload-btn {
+            width: 80px;
+            height: 80px;
+            background: #007bff;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            cursor: pointer;
+            border: none;
+        }
+        .upload-text {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+        h2 {
+            font-family: 'Barkscript', cursive;
+            color: #333;
+            font-size: 28px;
+        }
+        input, select {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 14px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            flex-direction: column;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            text-align: center;
+        }
+        .upload-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .upload-btn {
+            width: 80px;
+            height: 80px;
+            background: #363636;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 32px;
+            cursor: pointer;
+            border: none;
+        }
+        .upload-text {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+        h2 {
+            font-family: 'Barkscript', cursive;
+            color: #333;
+            font-size: 28px;
+        }
+        input, select {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 14px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #0056b3;
+        }
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .error {
+            border: 2px solid red;
+        }
+        .message {
+            display: none;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 16px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+    <script>
+        function triggerFileUpload() {
+            document.getElementById('fileInput').click();
+        }
+        
+        function capitalizeName() {
+            let name = document.getElementById('fullName');
+            name.value = name.value.replace(/\b\w/g, char => char.toUpperCase());
+        }
+        
+        function validateForm() {
+            let name = document.getElementById('fullName');
+            let email = document.getElementById('email');
+            let phone = document.getElementById('phone');
+            let selects = document.querySelectorAll('select');
+            let file = document.getElementById('fileInput');
+            let button = document.getElementById('registerBtn');
+            
+            let nameValid = /^[A-Z][a-z]+(\s[A-Z][a-z]+)*$/.test(name.value);
+            let emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value);
+            let phoneValid = /^\d{10}$/.test(phone.value);
+            let selectsValid = Array.from(selects).every(select => select.value !== "");
+            let fileValid = file.files.length > 0;
+            
+            name.classList.toggle('error', !nameValid);
+            email.classList.toggle('error', !emailValid);
+            phone.classList.toggle('error', !phoneValid);
+            
+            button.disabled = !(nameValid && emailValid && phoneValid && selectsValid && fileValid);
+        }
+        
+        function submitForm() {
+            let button = document.getElementById('registerBtn');
+            let messageBox = document.getElementById('messageBox');
+            
+            if (!button.disabled) {
+                messageBox.textContent = "Registration successful!";
+                messageBox.className = "message success";
+            } else {
+                messageBox.textContent = "Please correct errors in the form before submitting.";
+                messageBox.className = "message error-message";
+            }
+            messageBox.style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <div id="background-logo"></div>
+    <div class="container">
+        
+        <h2>Register</h2>
+        <div class="upload-container">
+            <button class="upload-btn" onclick="triggerFileUpload()">+</button>
+            <p class="upload-text">Upload a Profile Pic</p>
+            <input type="file" id="fileInput" style="display: none;" required>
+        </div>
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone Number" required>
+        <select required>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select>
+        <select required>
+            <option value="">Select Talent Category</option>
+            <option value="Secular singing">secular singing</option>
+            <option value="Gospel singing">Gospel Singing</option>
+            <option value="dancing">Dancing</option>
+            <option value="acting">Acting</option>
+            <option value="modelling">modelling</option>
+            <option value="Art">Art</option>
+            <option value="other">Other</option>
+        </select>
+        <select required>
+            <option value="">Select County</option>
+            <option value="baringo">Baringo</option>
+            <option value="bomet">Bomet</option>
+            <option value="bungoma">Bungoma</option>
+            <option value="busia">Busia</option>
+            <option value="elgeyo-marakwet">Elgeyo Marakwet</option>
+            <option value="embu">Embu</option>
+            <option value="garissa">Garissa</option>
+            <option value="homa-bay">Homa Bay</option>
+            <option value="isiolo">Isiolo</option>
+            <option value="kajiado">Kajiado</option>
+            <option value="kakamega">Kakamega</option>
+            <option value="kericho">Kericho</option>
+            <option value="kiambu">Kiambu</option>
+            <option value="kilifi">Kilifi</option>
+            <option value="kirinyaga">Kirinyaga</option>
+            <option value="kisii">Kisii</option>
+            <option value="kisumu">Kisumu</option>
+            <option value="kitui">Kitui</option>
+            <option value="kwale">Kwale</option>
+            <option value="laikipia">Laikipia</option>
+            <option value="lamu">Lamu</option>
+            <option value="machakos">Machakos</option>
+            <option value="makueni">Makueni</option>
+            <option value="mandera">Mandera</option>
+            <option value="marsabit">Marsabit</option>
+            <option value="meru">Meru</option>
+            <option value="migori">Migori</option>
+            <option value="mombasa">Mombasa</option>
+            <option value="murang'a">Murang'a</option>
+            <option value="nairobi">Nairobi</option>
+            <option value="nakuru">Nakuru</option>
+            <option value="nandi">Nandi</option>
+            <option value="narok">Narok</option>
+            <option value="nyamira">Nyamira</option>
+            <option value="nyandarua">Nyandarua</option>
+            <option value="nyeri">Nyeri</option>
+            <option value="samburu">Samburu</option>
+            <option value="siaya">Siaya</option>
+            <option value="taita-taveta">Taita Taveta</option>
+            <option value="tana-river">Tana River</option>
+            <option value="tharaka-nithi">Tharaka Nithi</option>
+            <option value="trans-nzoia">Trans Nzoia</option>
+            <option value="turkana">Turkana</option>
+            <option value="uasin-gishu">Uasin Gishu</option>
+            <option value="vihiga">Vihiga</option>
+            <option value="wajir">Wajir</option>
+            <option value="west-pokot">West Pokot</option>
+        </select>
+        <button class="btn">Register</button>
+    </div>
+</body>
+</html>
